@@ -16,5 +16,5 @@ export default function Home() {
       <ExperienceSection/>
       <Footer/>
     </>
-  );
+  );  
 }
