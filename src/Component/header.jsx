@@ -28,20 +28,34 @@ const Header = () => {
 					 </span>
 				 </div>
 				 <ul className="hidden md:flex gap-8 list-none m-0 p-0">
-					 <li><a href="#about" className={`transition-all duration-300 ${scrolled ? 'text-gray-600 hover:text-gray-900' : 'text-white/80 hover:text-white'} text-sm font-medium`}>About</a></li>
-					 <li><a href="#process" className={`transition-all duration-300 ${scrolled ? 'text-gray-600 hover:text-gray-900' : 'text-white/80 hover:text-white'} text-sm font-medium`}>Experience</a></li>
-					 <li><a href="#results" className={`transition-all duration-300 ${scrolled ? 'text-gray-600 hover:text-gray-900' : 'text-white/80 hover:text-white'} text-sm font-medium`}>Resume</a></li>
+					 <li className="relative group">
+						 <a href="#aboutme" className={`transition-all duration-300 ${scrolled ? 'text-gray-600 group-hover:text-orange-500' : 'text-white/80 group-hover:text-orange-400'} text-sm font-medium`}>
+							 About
+						 </a>
+						 <span className="absolute bottom-[-4px] right-0 w-0 h-[2px] bg-gradient-to-r from-orange-400 to-orange-600 group-hover:w-full group-hover:right-auto group-hover:left-0 transition-all duration-500 ease-out"></span>
+					 </li>
+					 <li className="relative group">
+						 <a href="#experience" className={`transition-all duration-300 ${scrolled ? 'text-gray-600 group-hover:text-orange-500' : 'text-white/80 group-hover:text-orange-400'} text-sm font-medium`}>
+							 Experience
+						 </a>
+						 <span className="absolute bottom-[-4px] right-0 w-0 h-[2px] bg-gradient-to-r from-orange-400 to-orange-600 group-hover:w-full group-hover:right-auto group-hover:left-0 transition-all duration-500 ease-out"></span>
+					 </li>
+					 <li className="relative group">
+						 <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view" target="_blank" rel="noopener noreferrer" className={`transition-all duration-300 ${scrolled ? 'text-gray-600 group-hover:text-orange-500' : 'text-white/80 group-hover:text-orange-400'} text-sm font-medium`}>
+							 Resume
+						 </a>
+						 <span className="absolute bottom-[-4px] right-0 w-0 h-[2px] bg-gradient-to-r from-orange-400 to-orange-600 group-hover:w-full group-hover:right-auto group-hover:left-0 transition-all duration-500 ease-out"></span>
+					 </li>
 				 </ul>
-				 <a
-					 href="#book"
-					 className={`px-5 py-2 rounded-full font-medium transition-all duration-300 text-sm border-none no-underline ${
+				 <button
+					 className={`px-5 py-2 rounded-full font-medium transition-all duration-300 text-sm border-none cursor-default ${
 						 scrolled 
-							 ? 'bg-gray-900 text-white hover:bg-gray-800 shadow-md ml-8' 
-							 : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/20'
+							 ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md ml-8' 
+							 : 'bg-gradient-to-r from-orange-400 to-orange-500 text-white backdrop-blur-sm shadow-lg'
 					 }`}
 				 >
 					 Hire Me
-				 </a>
+				 </button>
 			 </nav>
 		 </header>
 	);

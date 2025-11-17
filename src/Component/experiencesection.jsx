@@ -94,7 +94,7 @@ export default function ExperienceSection() {
   }
 
   return (
-    <section id="experience" className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black px-4 py-16">
+    <section id="experience" className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black px-4 py-16 pb-8">
       <div className="flex flex-col items-center w-full">
         <h2 className="uppercase text-sm tracking-widest text-gray-300 mb-2 text-center">The Experience</h2>
         <h1 className="text-6xl md:text-7xl font-serif font-light text-white mb-10 text-center drop-shadow-lg">

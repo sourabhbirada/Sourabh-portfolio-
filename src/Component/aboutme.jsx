@@ -6,12 +6,12 @@ export default function AboutMe() {
   return (
     <section 
       id="aboutme" 
-      className="relative w-full min-h-screen flex items-center justify-center px-4 bg-black"
+      className="relative w-full flex items-center justify-center px-4 bg-black py-12 pb-6"
     >
       {/* Seamless transition overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-60"></div>
       
-      <div className="relative z-10 max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 py-20">
+      <div className="relative z-10 max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center md:items-start gap-10">
         {/* Left: Text */}
         <div className="flex-1 animate-fade-in-up">
           <h2 className="uppercase text-sm tracking-widest text-gray-400 mb-4 opacity-80">More About Me</h2>
