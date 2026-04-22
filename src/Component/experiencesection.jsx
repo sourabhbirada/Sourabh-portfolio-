@@ -1,185 +1,178 @@
 "use client"
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 
-export default function ExperienceSection() {
-    const experiences = [
+const experiences = [
   {
-    date: "JAN 2025 - AUG 2025",
-    company: "Sportsdunia",
-    location: "Remote work",
-    remote: true,
-    role: "Full Stack Developer",
-    description: [
-      "Designed and developed Cricopinion CMS modules including posts, media management, and comprehensive content management systems for sports analytics platform.",
-      "Created multiple databases and APIs for CMS to ensure scalability and reliability, supporting high-traffic cricket content delivery across multiple platforms.",
-      "Implemented live cricket scores and updates using WebSockets for real-time performance, providing instant match updates to thousands of concurrent users.",
-      "Optimized database queries for better efficiency and speed, reducing response times by 40% and improving overall system performance.",
-      "Worked with Docker for containerization and optimized AWS infrastructure to reduce costs while maintaining high availability and scalability.",
-      "Built comprehensive user authentication and authorization systems including login, signup, and role-based access control for different user types."
-    ],
-    skills: ["Node.js", "React", "MongoDB", "WebSockets", "Docker", "AWS", "API Development", "Database Optimization", "Authentication", "Real-time Systems"]
+    role: "Full-Stack Developer",
+    company: "Your Company",
+    period: "2023 — Present",
+    type: "Full-time",
+    desc: "Building scalable web applications with React, Next.js, and Node.js. Architecting backend systems, designing APIs, and shipping production-ready features.",
+    tags: ["React", "Next.js", "Node.js", "PostgreSQL"],
   },
   {
-    date: "JUL 2024 - SEP 2024",
-    company: "Upflairs",
-    location: "Remote work", 
-    remote: true,
-    role: "DevOps Internship Training",
-    description: [
-      "Gained hands-on experience with Docker, Kubernetes, AWS, and comprehensive monitoring tools for enterprise-level infrastructure management.",
-      "Learned to build CI/CD pipelines using modern DevOps practices, implementing automated testing, deployment, and monitoring solutions.",
-      "Mastered Infrastructure as Code (IaC) principles using tools like Terraform and CloudFormation for scalable and maintainable infrastructure deployment."
-    ],
-    skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "CloudFormation", "Monitoring", "Infrastructure as Code", "DevOps", "Automation"]
+    role: "Frontend Developer",
+    company: "Previous Company",
+    period: "2021 — 2023",
+    type: "Full-time",
+    desc: "Developed pixel-perfect UI components, improved performance metrics, and collaborated closely with design and product teams on user-facing features.",
+    tags: ["React", "TypeScript", "Figma", "CSS"],
+  },
+  {
+    role: "Open Source Contributor",
+    company: "Various Projects",
+    period: "2020 — Present",
+    type: "Part-time",
+    desc: "Contributing to open source tools, writing documentation, fixing bugs, and building community utilities used by developers worldwide.",
+    tags: ["JavaScript", "GitHub", "Documentation"],
   },
 ];
 
-  const timelineRefs = useRef([]);
-  const timelineContainerRef = useRef(null);
-  const [scrollPos, setScrollPos] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPos(window.scrollY + window.innerHeight / 2);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  
-  function getSingleDotPosition(scrollY) {
-    if (!timelineContainerRef.current) return 0;
-    
-    const containerRect = timelineContainerRef.current.getBoundingClientRect();
-    const containerTop = containerRect.top + window.scrollY;
-    const containerHeight = containerRect.height;
-    
-    // Calculate progress through the entire timeline (0 to 1)
-    const progress = Math.min(Math.max((scrollY - containerTop) / containerHeight, 0), 1);
-    
-    // Return position as percentage of container height minus dot size
-    return progress * (containerHeight - 24); // 24px is dot height
-  }
-  function highlightKeywords(text) {
-  // Highlight keywords in description
-  const keywords = [
-    "Cricopinion CMS modules",
-    "posts, media management",
-    "multiple databases and APIs",
-    "scalability and reliability",
-    "live cricket scores and updates",
-    "WebSockets for real-time performance",
-    "database queries",
-    "40% and improving overall system performance",
-    "Docker for containerization",
-    "optimized AWS infrastructure",
-    "user authentication and authorization systems",
-    "role-based access control",
-    "Docker, Kubernetes, AWS",
-    "monitoring tools",
-    "CI/CD pipelines",
-    "Infrastructure as Code (IaC)",
-    "Terraform and CloudFormation",
-    "open-source projects with 15,000+ Github stars",
-    "developer communities",
-    "innovative solutions and best practices"
-  ];
-  let result = text;
-  keywords.forEach(kw => {
-    result = result.replace(
-      kw,
-      `<span class='text-gradient font-semibold'>${kw}</span>`
-    );
-  });
-  return result;
-  }
+export default function ExperienceSection() {
+  const [expanded, setExpanded] = useState(0);
 
   return (
-    <section id="experience" className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black px-4 py-16 pb-8">
-      <div className="flex flex-col items-center w-full">
-        <h2 className="uppercase text-sm tracking-widest text-gray-300 mb-2 text-center">The Experience</h2>
-        <h1 className="text-6xl md:text-7xl font-serif font-light text-white mb-10 text-center drop-shadow-lg">
-          Experience That Brings <span className="text-gradient font-semibold italic">Ideas to Life</span>
-        </h1>
-        <div className="max-w-5xl w-full mx-auto relative" ref={timelineContainerRef}>
-          {/* Single Continuous White Timeline Line */}
-          <div className="hidden md:block absolute left-1/3 top-0 bottom-0 w-1 bg-white" style={{ marginLeft: '2rem', zIndex: 1 }}></div>
-          
-          {/* Single Moving Dot */}
-          <div className="hidden md:block absolute left-1/3" style={{ marginLeft: '2rem', zIndex: 2 }}>
-            <div
-              className="w-6 h-6 rounded-full border-4 border-white shadow-lg dot-animate"
-              style={{
-                position: 'absolute',
-                top: `${getSingleDotPosition(scrollPos)}px`,
-                left: '50%',
-                transform: 'translate(-50%, 0)',
-                background: `linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)`,
-                transition: 'top 0.3s cubic-bezier(0.4,0,0.2,1)',
-              }}
-            ></div>
-          </div>
-          
-          <div className="flex flex-col gap-16">
-            {experiences.map((exp, idx) => (
-              <div key={exp.company} className="flex flex-col md:flex-row gap-8 items-start relative" ref={el => timelineRefs.current[idx] = el}>
-                {/* Left: Date & Company */}
-                <div className="md:w-1/3 flex flex-col items-start">
-                  <span className="uppercase text-xs text-gray-400 mb-2">{exp.date}</span>
-                  <h2 className="text-3xl font-serif text-white mb-2">{exp.company}</h2>
-                  <div className="flex items-center gap-2 text-gray-400 mb-1">
-                    <span className="text-lg">&#128205;</span>
-                    <span>{exp.location}</span>
-                  </div>
-                  {exp.remote && (
-                    <div className="flex items-center gap-2 text-gray-400">
-                      <span className="text-lg">&#128188;</span>
-                      <span className="font-semibold">Remote work</span>
-                    </div>
-                  )}
+    <section id="experience" style={{
+      background: "#1a1a1a",
+      padding: "100px 40px",
+      fontFamily: "'Syne', sans-serif",
+    }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+
+        .exp-row {
+          border-top: 0.5px solid rgba(255,255,255,0.08);
+          padding: 28px 0;
+          cursor: pointer;
+          transition: padding 0.3s;
+        }
+        .exp-row:last-child { border-bottom: 0.5px solid rgba(255,255,255,0.08); }
+        .exp-row:hover .exp-role { color: #c8ff57; }
+        .exp-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .exp-role {
+          font-size: clamp(20px, 3vw, 28px);
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          color: #f4f1ea;
+          transition: color 0.2s;
+        }
+        .exp-company {
+          font-family: 'DM Mono', monospace;
+          font-size: 11px;
+          color: rgba(244,241,234,0.35);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+        .exp-period {
+          font-family: 'DM Mono', monospace;
+          font-size: 10px;
+          color: rgba(244,241,234,0.3);
+          letter-spacing: 0.08em;
+        }
+        .exp-type {
+          font-family: 'DM Mono', monospace;
+          font-size: 9px;
+          padding: 3px 10px;
+          border-radius: 20px;
+          border: 0.5px solid rgba(200,255,87,0.3);
+          color: #c8ff57;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+        .exp-body {
+          overflow: hidden;
+          transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+        }
+        .exp-desc {
+          font-family: 'DM Mono', monospace;
+          font-size: 12px;
+          color: rgba(244,241,234,0.5);
+          line-height: 2;
+          padding-top: 16px;
+          max-width: 600px;
+        }
+        .exp-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-top: 14px;
+        }
+        .exp-tag {
+          font-family: 'DM Mono', monospace;
+          font-size: 9px;
+          padding: 4px 12px;
+          border-radius: 20px;
+          border: 0.5px solid rgba(255,255,255,0.12);
+          color: rgba(244,241,234,0.45);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+        }
+        .exp-arrow {
+          font-size: 20px;
+          color: rgba(244,241,234,0.2);
+          transition: transform 0.3s, color 0.2s;
+          flex-shrink: 0;
+        }
+        .exp-arrow.open {
+          transform: rotate(45deg);
+          color: #c8ff57;
+        }
+      `}</style>
+
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+
+        {/* Masthead */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <span style={{ fontFamily: "'DM Mono',monospace", fontSize: 10, letterSpacing: "0.18em", color: "rgba(244,241,234,0.25)", textTransform: "uppercase" }}>
+            Portfolio / Experience
+          </span>
+          <span style={{ fontFamily: "'DM Mono',monospace", fontSize: 9, color: "rgba(244,241,234,0.2)" }}>04</span>
+        </div>
+        <div style={{ height: 2, background: "rgba(244,241,234,0.12)", marginBottom: 48 }} />
+
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
+          <h2 style={{ fontSize: "clamp(40px,6vw,68px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.9, color: "#f4f1ea", textTransform: "uppercase" }}>
+            WHERE<br />
+            I'VE <span style={{ background: "#c8ff57", color: "#1a1a1a", padding: "0 8px", display: "inline-block" }}>WORKED</span>
+          </h2>
+          <p style={{ fontFamily: "'DM Mono',monospace", fontSize: 11, color: "rgba(244,241,234,0.35)", lineHeight: 1.9, maxWidth: 240 }}>
+            Roles and projects that<br />shaped how I build things.
+          </p>
+        </div>
+
+        {/* Experience list */}
+        <div>
+          {experiences.map((exp, i) => (
+            <div key={i} className="exp-row" onClick={() => setExpanded(expanded === i ? -1 : i)}>
+              <div className="exp-top">
+                <div>
+                  <div className="exp-role">{exp.role}</div>
+                  <div className="exp-company" style={{ marginTop: 4 }}>{exp.company}</div>
                 </div>
-                {/* Empty space for timeline alignment */}
-                <div className="hidden md:block mx-4" style={{ minWidth: '2rem' }}></div>
-              {/* Right: Role & Description */}
-              <div className="md:w-2/3">
-                <h3 className="text-2xl font-serif text-white mb-2">{exp.role}</h3>
-                <ul className="list-disc pl-5 mb-4 text-gray-300">
-                  {exp.description.map((desc, i) => (
-                    <li key={i} className="mb-2"><span dangerouslySetInnerHTML={{__html: highlightKeywords(desc)}} /></li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {exp.skills.map(skill => (
-                    <span key={skill} className="bg-[#18181b] px-4 py-2 rounded-xl text-white text-sm font-medium border border-neutral-800 shadow hover:scale-105 transition-transform">
-                      {skill}
-                    </span>
-                  ))}
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="exp-period">{exp.period}</span>
+                  <span className="exp-type">{exp.type}</span>
+                  <span className={`exp-arrow${expanded === i ? " open" : ""}`}>+</span>
+                </div>
+              </div>
+              <div className="exp-body" style={{ maxHeight: expanded === i ? 200 : 0, opacity: expanded === i ? 1 : 0 }}>
+                <p className="exp-desc">{exp.desc}</p>
+                <div className="exp-tags">
+                  {exp.tags.map(t => <span key={t} className="exp-tag">{t}</span>)}
                 </div>
               </div>
             </div>
           ))}
-            </div>
+        </div>
+
       </div>
-  
-      </div>
-      <style jsx>{`
-        .text-gradient {
-          background: linear-gradient(90deg, #a855f7, #ec4899, #f59e42);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-fill-color: transparent;
-        }
-        .dot-animate {
-          box-shadow: 0 0 16px #a855f7, 0 0 32px #6366f1;
-          transition: top 0.5s cubic-bezier(0.4,0,0.2,1), background 0.5s;
-        }
-      `}</style>
     </section>
-
-      )
-
-    }
-
-
-
-  
+  );
+}
