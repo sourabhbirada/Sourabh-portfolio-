@@ -12,7 +12,7 @@ const experiences = [
   },
   {
     role: "Backend Developer",
-    company: "Project Work",
+    company: "SportDunia",
     period: "Feb 2025 — Aug 2025",
     type: "Internship",
     desc: "Built backend modules and APIs, handled database integration, and improved server-side performance across real-world project workflows.",
